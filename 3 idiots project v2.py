@@ -62,8 +62,8 @@ while cont:
                     # Creates the grade card and adds the overall grade to it as a dictionary.
                     Gcard.update({names[i]: grade[i]})
                 print("-------------------------------------------")
-                print("The overall percentage for each student is:")
-                # Prints the overall percentage for each student.
+                print("The subject-wise percentage for each student is:")
+                # Prints the subject-wise percentage for each student.
                 for x, y in Mcard.items():
                     print("{}: {}".format(x, y))
                 print("-------------------------------------------")
