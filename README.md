@@ -6,7 +6,7 @@ Once again this took too long to do.
 
 ### Idiot 1, **Aditya**: 
 
-Contributed the base code for the report card and did the **file management part** (Thank you so much for that)
+Contributed the base code for the report card and did the ***file management part*** (Thank you so much for that)
 
 ### Idiot 2, **Vivyan**:
 
