@@ -15,11 +15,3 @@ Contributed the main portion of edited code, did some bug testing and debugging 
 ### Idiot 3, **Rathiin**:
 
 Bug testing, debugging, code clean-up
-
-### Idiot 4, **Ihit**:
-
-Made another cameo.
-
-### Idiot 5, **Aarav Saini**:
-
-Comtributed to the code by being there.
