@@ -14,7 +14,7 @@ Contributed the main portion of edited code and did some bug testing.
 
 ### Idiot 3, **Rathiin**:
 
-Emotional Support.
+Bug testing, debugging, code clean-up
 
 ### Idiot 4, **Ihit**:
 
