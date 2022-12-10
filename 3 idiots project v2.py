@@ -1,4 +1,6 @@
-fi = open("ReportCard.txt", 'w')
+# Creates/opens a file to append lines into it.
+fi = open("ReportCard.txt", 'a')
+# Defining lists and dictionaries required in the program.
 Mcard = {}
 Gcard = {}
 Scard = {}
