@@ -1,11 +1,14 @@
+fi = open("ReportCard.txt", 'w')
 Mcard = {}
 Gcard = {}
+Scard = {}
 names = []
 marks = []
 grade = []
 maths = []
 cs = []
 eng = []
+# Defining a function to check for errors in data entry in the marks, to prevent the program from self-destructing.
 def float_input(input_message, error_message):
   while True:
     try:
@@ -65,9 +68,11 @@ while cont:
                         print("The number has to be above 0 and below 100.")
                     # Adds the average marks of the class to a list to be used in a sum for calculating the overall average of the class.
                     marks.append(avgMarks)
-                    # Creates the dictionary for the Marks Card.
-                    Mcard.update({names[i]: {"Maths": maths[i],"Computer science": cs[i], "English": eng[i]}})
-                    # Creates the grade card and adds the overall grade to it as a dictionary.
+                    # Updates the dictionary for the subject-wise marks
+                    Scard.update({"Maths": maths[i], "Computer Science": cs[i], "English": eng[i]})
+                    # Updates the dictionary for the Marks Card.
+                    Mcard.update({names[i]: Scard})
+                    # Updates the grade card and adds the overall grade to it as a dictionary.
                     Gcard.update({names[i]: grade[i]})
                 print("-------------------------------------------")
                 print("The subject-wise percentage for each student is:")
@@ -79,12 +84,15 @@ while cont:
                 print("The overall grade for each student is:")
                 # Prints the grades for each student.
                 for x, y in Gcard.items():
-                    print(str(("{}: {}".format(x, y))))
+                    print(str((f'{x}: {y}')))
 
                 print("-------------------------------------------")
-                print("the average percentage of the entire class is: ")
-                # Calculates and prints the average percentage of the entire class.
-                print(int((round(sum(marks) / len(names), 2))))
+                print("The average percentage of the entire class is: ")
+                # Calculates and stores the average percentage of the entire class.
+                # The avgClass variable is used later in the code for making file management simpler.
+                avgClass = float((round(sum(marks) / len(names), 2)))
+                # Prints the class average.
+                print(avgClass)
 
                 print("-------------------------------------------")
             # Except for the number check.
@@ -129,4 +137,38 @@ while cont:
         # If the input is not yes or no, it shows this error.
         else:
             print("The input has to be yes or no.")
-file.close()
+# From here, the file management part starts.
+# Title
+fi.write("                              DPS INTERNATIONAL SAKET                                 ")
+# The 2 fi.write("\n") lines are used to give spaces between titles.
+fi.write("\n")
+fi.write("\n")
+# Individual grades title.
+fi.write("Individual Grades:  ")
+fi.write("\n")
+fi.write("\n")
+# Used to print the subject-wise marks without any dictionary brackets
+# Used to remove the dictionary brackets from the outer dictionary, value isn't used in the f' string
+for key, value in Mcard.items():
+# Used to remove the dictionary brackets from the subject-wise marks themselves.
+    for key2, value2 in Scard.items():
+        fi.write((str(f'{key}: {key2}, {value2}; ')))
+# Seperates the lines between the grades. 
+    fi.write("\n")
+# Adds a space between titles
+fi.write("\n")
+fi.write("Grades for each student:    ")
+fi.write("\n")
+fi.write("\n")
+# Used to remove the dictionary brackets from the grades to make it a cleaner text.
+for key, value in Gcard.items():
+    fi.write(str(f'{key}: The grade is {value}'))
+    fi.write("\n")
+fi.write("\n")
+fi.write("Class average: ")
+fi.write("\n")
+fi.write("\n")
+# Variable created to store the class average is called here in an f' string.
+fi.write("The class average is " + f'{avgClass}')
+# The file is closed.
+fi.close()
