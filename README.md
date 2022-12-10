@@ -10,7 +10,7 @@ Contributed the base code for the report card and did the ***file management par
 
 ### Idiot 2, **Vivyan**:
 
-Contributed the main portion of edited code, did some bug testing and added the temporary ***file management system***.
+Contributed the main portion of edited code, did some bug testing and debugging and added the temporary ***file management system***.
 
 ### Idiot 3, **Rathiin**:
 
