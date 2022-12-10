@@ -6,6 +6,14 @@ grade = []
 maths = []
 cs = []
 eng = []
+def float_input(input_message, error_message):
+  while True:
+    try:
+      f = float(input(input_message))
+      break
+    except:
+      print(error_message) # or `pass` for nothing
+  return f
 # cont = True is used to keep the program running. It's set to true or false at the end of the program.
 cont = True
 while cont:
@@ -15,7 +23,7 @@ while cont:
         num = int(input("Please input the number of students in your class: "))
         print(" ")
         # Names of each of the students in the list
-        names = [str(i) for i in input("Please input all the names seperating them with a comma and space (Example: Aditya, Rathiin, Vivyan)").split(", ")]
+        names = [str(i) for i in input("Please input all the names seperating them with a comma and space (Example: Aditya, Rathiin, Vivyan): ").split(", ")]
         # Checks the number of names entered is the same as the number of students initially decided
         if len(names)!=num:
             print(" ")
@@ -27,13 +35,13 @@ while cont:
                 # Used to create the dictionary for the grades and average.
                 for i in range(0, len(names)):
                     print(" ")
-                    m = (float(input("please input the Maths percentage of {}: ".format(names[i]))))
+                    m = float_input(f"please input the Maths percentage of {names[i]}: ", 'Not a number')
                     print(" ")
                     im = int(m) + 1
-                    c = (float(input("Please input the Computer Science percentage of {}: ".format(names[i]))))
+                    c = float_input(f"Please input the Computer Science percentage of {names[i]}: ", 'Not a number')
                     print(" ")
                     ic = int(c) + 1
-                    e = (float(input("Please enter the English percentage of {}: ".format(names[i]))))
+                    e = float_input(f"Please enter the English percentage of {names[i]}: ", 'Not a number')
                     ie = int(e) + 1
                     # Checks if the numbers are greater or equal to 0 and lesser or equal to 100.
                     if im in range(0,101) and ic in range(0,101) and ie in range(0,101):
@@ -50,8 +58,8 @@ while cont:
                         elif int(avgMarks) + 1 in range(60,70):
                             grade.append('D')
                         elif int(avgMarks) + 1 in range(0,60):
-                            grade.append("Fail")    
-                    # Prints the error for the if condition.
+                            grade.append("Fail")
+                        # Prints the error for the if condition.
                     else:
                         print(" ")
                         print("The number has to be above 0 and below 100.")
@@ -65,16 +73,19 @@ while cont:
                 print("The subject-wise percentage for each student is:")
                 # Prints the subject-wise percentage for each student.
                 for x, y in Mcard.items():
-                    print("{}: {}".format(x, y))
+                    print(str((f'{x}: {y}')))
+
                 print("-------------------------------------------")
                 print("The overall grade for each student is:")
                 # Prints the grades for each student.
                 for x, y in Gcard.items():
-                    print("{}: {}".format(x, y))
+                    print(str(("{}: {}".format(x, y))))
+
                 print("-------------------------------------------")
                 print("the average percentage of the entire class is: ")
                 # Calculates and prints the average percentage of the entire class.
-                print(round(sum(marks) / len(names), 2))
+                print(int((round(sum(marks) / len(names), 2))))
+
                 print("-------------------------------------------")
             # Except for the number check.
             except:
@@ -118,3 +129,4 @@ while cont:
         # If the input is not yes or no, it shows this error.
         else:
             print("The input has to be yes or no.")
+file.close()
