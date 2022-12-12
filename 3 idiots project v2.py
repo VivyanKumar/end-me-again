@@ -1,5 +1,5 @@
 # Creates/opens a file to append lines into it.
-fi = open("ReportCard.txt", 'a')
+fi = open("myfile.txt", 'a')
 # Defining lists and dictionaries required in the program.
 Mcard = {}
 Gcard = {}
@@ -11,10 +11,10 @@ maths = []
 cs = []
 eng = []
 # Defining a function to check for errors in data entry in the marks, to prevent the program from self-destructing.
-def float_input(input_message, error_message):
+def int_input(input_message, error_message):
   while True:
     try:
-      f = float(input(input_message))
+      f = int(input(input_message))
       break
     except:
       print(error_message) # or `pass` for nothing
@@ -40,29 +40,29 @@ while cont:
                 # Used to create the dictionary for the grades and average.
                 for i in range(0, len(names)):
                     print(" ")
-                    m = float_input(f"please input the Maths percentage of {names[i]}: ", 'Not a number')
+                    m = int_input(f"please input the Maths percentage of {names[i]}: ", 'Not a number')
                     print(" ")
-                    im = int(m) + 1
-                    c = float_input(f"Please input the Computer Science percentage of {names[i]}: ", 'Not a number')
+                    im = int(m)
+                    c = int_input(f"Please input the Computer Science percentage of {names[i]}: ", 'Not a number')
                     print(" ")
-                    ic = int(c) + 1
-                    e = float_input(f"Please enter the English percentage of {names[i]}: ", 'Not a number')
-                    ie = int(e) + 1
+                    ic = int(c)
+                    e = int_input(f"Please enter the English percentage of {names[i]}: ", 'Not a number')
+                    ie = int(e)
                     # Checks if the numbers are greater or equal to 0 and lesser or equal to 100.
                     if im in range(0,101) and ic in range(0,101) and ie in range(0,101):
                         avgMarks = ((m + c + e) / 3)
                         maths.append(m)
                         cs.append(c)
                         eng.append(e)
-                        if int(avgMarks) + 1 in range(90,101):
+                        if int(avgMarks) in range(90,101):
                             grade.append('A')
-                        elif int(avgMarks) + 1 in range(80, 90):
+                        elif int(avgMarks) in range(80, 90):
                             grade.append('B')
-                        elif int(avgMarks) + 1 in range(70,80):
+                        elif int(avgMarks) in range(70,80):
                             grade.append('C')
-                        elif int(avgMarks) + 1 in range(60,70):
+                        elif int(avgMarks) in range(60,70):
                             grade.append('D')
-                        elif int(avgMarks) + 1 in range(0,60):
+                        elif int(avgMarks) in range(0,60):
                             grade.append("Fail")
                         # Prints the error for the if condition.
                     else:
@@ -141,7 +141,7 @@ while cont:
             print("The input has to be yes or no.")
 # From here, the file management part starts.
 # Title
-fi.write("                              DPS INTERNATIONAL SAKET                                 ")
+fi.write("\n DPS INTERNATIONAL SAKET")
 # The 2 fi.write("\n") lines are used to give spaces between titles.
 fi.write("\n")
 fi.write("\n")
