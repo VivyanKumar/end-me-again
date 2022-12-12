@@ -93,6 +93,7 @@ while cont:
                 # Calculates and stores the average percentage of the entire class.
                 # The avgClass variable is used later in the code for making file management simpler.
                 avgClass = float((round(sum(marks) / len(names), 2)))
+                avgClass = avgClass if avgClass else None or "FAILURE"  # to handle it
                 # Prints the class average.
                 print(avgClass)
 
@@ -126,6 +127,41 @@ while cont:
             cs = []
             eng = []
             # Breaks the while loop used to reinput the answer
+            fi.write("\n\nDPS INTERNATIONAL SAKET")
+            # The 2 fi.write("\n") lines are used to give spaces between titles.
+            fi.write("\n")
+            fi.write("\n")
+            # Individual grades title.
+            fi.write("Individual Grades:  ")
+            fi.write("\n")
+            fi.write("\n")
+            # Used to print the subject-wise marks without any dictionary brackets
+            # Used to remove the dictionary brackets from the outer dictionary, value isn't used in the f' string
+            for key, value in Mcard.items():
+                # Used to remove the dictionary brackets from the subject-wise marks themselves.
+                for key2, value2 in Scard.items():
+                    fi.write((str(f'{key}: {key2}, {value2}; ')))
+                # Seperates the lines between the grades.
+                fi.write("\n")
+            # Adds a space between titles
+            fi.write("\n")
+            fi.write("Grades for each student:    ")
+            fi.write("\n")
+            fi.write("\n")
+            # Used to remove the dictionary brackets from the grades to make it a cleaner text.
+            for key, value in Gcard.items():
+                fi.write(str(f'{key}: The grade is {value}'))
+                fi.write("\n")
+            fi.write("\n")
+            fi.write("Class average: ")
+            fi.write("\n")
+            fi.write("\n")
+            # Variable created to store the class average is called here in an f' string.
+            fi.write("The class average is " + f'{avgClass}')
+            fi.write("\n")
+            fi.write("\n")
+            fi.write('------------------------')
+
             break
         # Checks if the input is no and removes case sensitivity.
         elif x.lower() == 'n' or x.lower() == 'no':
@@ -135,12 +171,14 @@ while cont:
             print(" ")
             # Sets the cont variable to false to effectively stop the program by stopping the while cont loop the entire program is under.
             cont = False
+            fi.close()
             break
         # If the input is not yes or no, it shows this error.
         else:
             print("The input has to be yes or no.")
 # From here, the file management part starts.
 # Title
+fi = open("myfile.txt", 'a')
 fi.write("\n\nDPS INTERNATIONAL SAKET")
 # The 2 fi.write("\n") lines are used to give spaces between titles.
 fi.write("\n")
@@ -155,7 +193,7 @@ for key, value in Mcard.items():
 # Used to remove the dictionary brackets from the subject-wise marks themselves.
     for key2, value2 in Scard.items():
         fi.write((str(f'{key}: {key2}, {value2}; ')))
-# Seperates the lines between the grades. 
+# Seperates the lines between the grades.
     fi.write("\n")
 # Adds a space between titles
 fi.write("\n")
