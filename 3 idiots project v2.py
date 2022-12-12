@@ -141,7 +141,7 @@ while cont:
             print("The input has to be yes or no.")
 # From here, the file management part starts.
 # Title
-fi.write("\n DPS INTERNATIONAL SAKET")
+fi.write("\n\nDPS INTERNATIONAL SAKET")
 # The 2 fi.write("\n") lines are used to give spaces between titles.
 fi.write("\n")
 fi.write("\n")
@@ -172,5 +172,8 @@ fi.write("\n")
 fi.write("\n")
 # Variable created to store the class average is called here in an f' string.
 fi.write("The class average is " + f'{avgClass}')
+fi.write("\n")
+fi.write("\n")
+fi.write('------------------------')
 # The file is closed.
 fi.close()
