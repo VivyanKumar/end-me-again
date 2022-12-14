@@ -10,9 +10,9 @@ while True:
         else:
             print("invalid input")
             continue
-
     except:
         print("invalid input")
+        
     try:
         names = [str(x) for x in input("names: ").split(", ")]
     except:
