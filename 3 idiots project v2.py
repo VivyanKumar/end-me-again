@@ -33,10 +33,10 @@ while True:
                     avgMarks = ((mathsMarks + csMarks + englishMarks) / 3)
                     marksDict = {
                         range(90, 101): "A",
-                        range(80, 90): "B",
-                        range(70, 80): "C",
-                        range(60, 70): "D",
-                        range(0,50): "F"
+                        range(80, 91): "B",
+                        range(70, 81): "C",
+                        range(60, 71): "D",
+                        range(0,51): "F"
                     }
                     grade = "F"  # default grade
                     for key in marksDict:
