@@ -6,7 +6,7 @@ Once again this took too long to do.
 
 ### Idiot 1, **Aditya**: 
 
-Base Code
+Base Code and completely revamped base code, going from 260 to 55 lines.
 
 ### Idiot 2, **Vivyan**:
 
