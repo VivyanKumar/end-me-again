@@ -36,11 +36,12 @@ while True:
                         range(80, 90): "B",
                         range(70, 80): "C",
                         range(60, 70): "D",
+                        range(0,50): "F"
                     }
                     grade = "F"  # default grade
                     for key in marksDict:
                         grade = marksDict[key]  # update grade
-                        if avgMarks in key:
+                        if round(avgMarks) in key:
                             break
 
                 else:
