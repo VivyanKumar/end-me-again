@@ -6,12 +6,12 @@ Once again this took too long to do.
 
 ### Idiot 1, **Aditya**: 
 
-Contributed the base code for the report card and did the ***file management part*** (Thank you so much for that)
+Base Code
 
 ### Idiot 2, **Vivyan**:
 
-Contributed the main portion of edited code, did some bug testing and debugging and added the temporary ***file management system***.
+ Spent 4 hours coding ~260 lines just for it to get deleted and fixed Aditya's small brain moments with the dictionary and added file reading and printing into console
 
 ### Idiot 3, **Rathiin**:
 
-Bug testing, debugging, code clean-up
+Fixed the entire code reduced it from 260 lines to 72 lines, totally revamped the file management part made a function to fetch the report card text files, ****DID EVERYTHING AT THE END****
