@@ -25,11 +25,15 @@ Researched how to fix some errors we were coming across *cough cough* going on s
 
 
 For the Computer Science Report Card Project:
+
 1️⃣ ~~Add a password system for differentiating between teachers and students and make the functions available accordingly.~~
+
 2️⃣ ***Create a prototype for the code with no error handling, assuming the best case scenario***
         ➡️**Show ma'am the prototype with the best case scenario**
+        
 3️⃣**Send the prototype for testing (we'll all test it and give it to bhaavik too)*
         ➡️*Fix the errors found*
+        
 4️⃣**Try to perfect the program and make it user friendly**
         ➡️*Give it to classmates for beta testing*
         ➡️**Fix the errors that they find**
