@@ -1,5 +1,17 @@
 import pyfiglet
-Password = 'DPSI TEACHER PASS'
+try:
+    fil = open('Password.txt', 'r')
+    Password = fil.read()
+    if Password == '':
+        print("There is no password entered. So, just press enter. Please set a password after this program.")
+    fil.close()
+except FileNotFoundError:
+    fil = open('Password.txt', 'x')
+    Password = 'DPSI TEACHER PASS'
+    fil.close()
+    fil = open('Password.txt', 'w')
+    fil.write(f'{Password}')
+    fil.close()
 print(pyfiglet.figlet_format("DPSI"))
 names = []
 try:
@@ -11,6 +23,19 @@ except FileNotFoundError:
     fi.close()
 n = str(names).replace('[', '').replace(']', '').replace("'", '')
 Admin = None
+def grades(input):
+    marksDict = {
+        range(90,101): 'A',
+        range(80,90): 'B',
+        range(70,80): 'C',
+        range(60,70): 'D',
+        range(0,60): 'Fail'
+    }
+    for key in marksDict:
+        grade = marksDict[key]
+        if round(input) in key:
+            return grade
+            break
 def cardWriter():
     name = input("Enter the student's name: ")
     names.append(name)
@@ -54,16 +79,7 @@ def cardWriter():
     average_marks = total_marks / 3
 
     # Find the grade based on thresholds from 0 to 100, with below 60 being fail
-    if average_marks >= 90:
-        grade = "A+"
-    elif average_marks >= 80:
-        grade = "A"
-    elif average_marks >= 70:
-        grade = "B"
-    elif average_marks >= 60:
-        grade = "C"
-    else:
-        grade = "F"
+    grade = grades(average_marks)
 
     # Create the report card for the student
     report_card = f"---------------------\n" \
@@ -95,20 +111,30 @@ def cardEditor():
             continue
     while cont:
         subject = input("please enter which subject's grade you wish to change: ")
-        num = input('Please enter the grade you want to change it to mofo kill me')
+        num = float(input('Please enter the grade you want to change it to: '))
         if subject.lower() == "maths":
-            lines[2] = f'Marks Maths: {num}\n'
+            lines[2] = f'maths marks: {num}\n'
         elif subject.lower() == "computer":
-            lines[3] = f'Computer Science Marks: {num}\n'
+            lines[3] = f'computer marks: {num}\n'
         elif subject.lower() == "english":
-            lines[4] = f'English Marks: {num}\n'
+            lines[4] = f'english marks: {num}\n'
         else:
             print("invalid value")
             continue
 
         with open(f"{name}.txt", "w") as f:
             f.writelines(lines)
-
+        with open(f'{name}.txt', 'r') as f:
+            l = f.readlines()
+            math = float(l[2].replace("maths marks: ", '').replace('\n', ''))
+            cs = float(l[3].replace("computer marks: ", '').replace('\n',''))
+            eng = float(l[4].replace("english marks: ", '').replace('\n', ''))
+        with open(f'{name}.txt', 'w') as f:
+            total = math + cs + eng
+            avg = round((total / 3), 2)
+            grade = grades(avg)
+            card = f"---------------------\n{name}'s report card:\nmaths marks: {math}\ncomputer marks: {cs}\nenglish marks: {eng}\nTotal marks: {total}\nAverage: {avg}\nGrade: {grade}\n---------------------"
+            f.write(card)
 
         while True:
             choice = input("would you like to change another grade? (Y/N): ")
