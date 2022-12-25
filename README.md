@@ -53,4 +53,8 @@ Key:
 **Currently Working on:**  
     2️⃣***Create a prototype for the code with no error handling, assuming the best case scenario***  
       
-    **To be finished by *28/12/22* by the *latest***
+    **To be finished by *28/12/22* by the *latest***  
+  
+  
+  
+***25/12/2022 2️⃣~~***Create a prototype for the code with no error handling, assuming the best case scenario***~~ Completed
