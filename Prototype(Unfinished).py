@@ -110,8 +110,8 @@ def cardEditor():
             print("invalid input")
             continue
     while cont:
-        subject = input("please enter which subject's grade you wish to change: ")
-        num = float(input('Please enter the grade you want to change it to: '))
+        subject = input("please enter which subject's marks you wish to change (maths for maths, computer for computer science and english for english.): ")
+        num = float(input('Please enter the marks you want to change it to: '))
         if subject.lower() == "maths":
             lines[2] = f'maths marks: {num}\n'
         elif subject.lower() == "computer":
@@ -129,16 +129,33 @@ def cardEditor():
             math = float(l[2].replace("maths marks: ", '').replace('\n', ''))
             cs = float(l[3].replace("computer marks: ", '').replace('\n',''))
             eng = float(l[4].replace("english marks: ", '').replace('\n', ''))
-        with open(f'{name}.txt', 'w') as f:
+            b = open(f'{name}.txt', 'w')
             total = math + cs + eng
             avg = round((total / 3), 2)
             grade = grades(avg)
-            card = f"---------------------\n{name}'s report card:\nmaths marks: {math}\ncomputer marks: {cs}\nenglish marks: {eng}\nTotal marks: {total}\nAverage: {avg}\nGrade: {grade}\n---------------------"
-            f.write(card)
+            card = f"---------------------\n{name}'s report card:\nmaths marks: {math}\ncomputer marks: {cs}\nenglish marks: {eng}\nTotal marks: {total}\nAverage: {avg}\nGrade: {grade}\n---------------------\n"
+            b.write(card)
+            b.close()
+            with open('Class Card.txt', 'r') as fi:
+                temp = fi.readlines()
+                for i in range(len(temp)):
+                    if temp[i] == f"{name}'s report card:\n":
+                        temp[i] = f"{name}'s report card:\n"
+                        temp[i+1] = f"maths marks: {math}\n"
+                        temp[i+2] = f"computer marks: {cs}\n"
+                        temp[i+3] = f"english marks: {eng}\n"
+                        temp[i+4] = f"Total marks: {total}\n"
+                        temp[i+5] = f"Average: {avg}\n"
+                        temp[i+6] = f"Grade: {grade}\n"
+                        temp[i+7] = '---------------------\n'
+                        a = open('Class Card.txt', 'w')
+                        a.writelines(temp)
+            
 
         while True:
             choice = input("would you like to change another grade? (Y/N): ")
             if choice.lower() == 'y':
+                cont = True
                 break
             elif choice.lower() == 'n':
                 cont = False
