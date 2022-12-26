@@ -1,4 +1,6 @@
 import pyfiglet
+print(pyfiglet.figlet_format("DPSI"))
+
 try:
     fil = open('Password.txt', 'r')
     Password = fil.read()
@@ -12,7 +14,7 @@ except FileNotFoundError:
     fil = open('Password.txt', 'w')
     fil.write(f'{Password}')
     fil.close()
-print(pyfiglet.figlet_format("DPSI"))
+
 names = []
 try:
     fi = open('List of names.txt', 'r')
@@ -99,16 +101,18 @@ def cardWriter():
     l.write(n)
 def cardEditor():
     cont = True
-    print(f"Students who have a card are {n}")    
+    print(f"Students who have a card are {n}")
     name = input("please enter the student's name who's card you wish to edit: ")
-    while True:
+    while cont:
         try:
             with open(f"{name}.txt", "r") as f:
                 lines = f.readlines()
                 break
         except:
-            print("invalid input")
-            continue
+            print("please enter a valid input\n")
+            print("--------------------------------------------------------------------")
+            cont = False
+            return True #activates the universal failsafe to recall the function
     while cont:
         subject = input("please enter which subject's marks you wish to change (maths for maths, computer for computer science and english for english.): ")
         num = float(input('Please enter the marks you want to change it to: '))
@@ -151,8 +155,6 @@ def cardEditor():
                         a = open('Class Card.txt', 'w')
                         a.writelines(temp)
                         a.close()
-            
-
         while True:
             choice = input("would you like to change another grade? (Y/N): ")
             if choice.lower() == 'y':
@@ -190,58 +192,74 @@ functionsList = [cardWriter, cardEditor, changePass, cardReader, classCard]
 
 while True:
     n = str(names).replace('[', '').replace(']', '').replace("'", '')
-    if Admin == True:
-        print("---------------------------------------------------------------------\n"
-        "press 1 if you want to write to a new file\n"
-        "press 2 if you want to append the marks of an existing file\n"
-        "press 3 if you want to change the password\n"
-        "press 4 if you want to read the report card of a specific student\n"
-        "press 5 if you want the class report\n"
-        "press 0 if you want to exit\n")
-
-        choice = int(input("Please input your choice: "))
-        if choice in range(1, 6):
-            print("-----------------------------------------------------------------")
-            functionsList[choice-1]()
-        elif choice == 0:
-            print("now exiting the program\n"
-                "-----------------------------------------------------------------")
-            break
-        else:
-            print("please enter a valid input thats listed below")
-            continue
-    elif Admin == False:
-        print("---------------------------------------------------------------------\n"
-            "press 1 if you want to read the report card of a student.\n"
-            "press 2 if you want to read the class report card\n"
+    try:
+        if Admin == True:
+            print("---------------------------------------------------------------------\n"
+            "press 1 if you want to write to a new file\n"
+            "press 2 if you want to append the marks of an existing file\n"
+            "press 3 if you want to change the password\n"
+            "press 4 if you want to read the report card of a specific student\n"
+            "press 5 if you want the class report\n"
             "press 0 if you want to exit\n")
-        choice = int(input("Please enter your choice."))
-        if choice in range(1,3):
-            print("-----------------------------------------------------------------")
-            functionsList[choice+1]()
-        elif choice == 0:
-            print("Exiting")
-            print("-----------------------------------------------------------------")
-            break
-        else:
-            print("Enter a valid input")
-            continue
-    else:
-        while True:
-            Passcheck = input("Please enter the administrative password: ")
-            if Passcheck == Password:
-                print("Okay, confirmed.\nWelcome Admin.")
-                Admin = True
+
+            choice = int(input("Please input your choice: "))
+            if choice in range(1, 6):
+                print("-----------------------------------------------------------------")
+                # below module acts as a universal failsafe
+                functionsList[choice-1]()
+                check = functionsList[choice-1]()
+                if check:
+                    functionsList[choice-1]()
+                else:
+                    pass
+            elif choice == 0:
+                print("now exiting the program\n"
+                    "-----------------------------------------------------------------")
                 break
             else:
-                check = input("Are you sure you're an administrator? (Y/N)")
-                if check.lower() == 'y' or check.lower() == 'yes':
-                    print("Okay, reloading.")
-                    continue
-                elif check.lower() == 'n' or check.lower() == 'no':
-                    print("Okay, no problem.")
-                    Admin = False
+                print("please enter a valid input thats listed below")
+                continue
+        elif Admin == False:
+            print("---------------------------------------------------------------------\n"
+                "press 1 if you want to read the report card of a student.\n"
+                "press 2 if you want to read the class report card\n"
+                "press 0 if you want to exit\n")
+            choice = int(input("Please enter your choice: "))
+            if choice in range(1,3):
+                print("-----------------------------------------------------------------")
+                #below module acts as a universal failsafe
+                functionsList[choice - 1]()
+                check = functionsList[choice - 1]()
+                if check:
+                    functionsList[choice - 1]()
+                else:
+                    pass
+            elif choice == 0:
+                print("Exiting")
+                print("-----------------------------------------------------------------")
+                break
+            else:
+                print("Enter a valid input")
+                continue
+        else:
+            while True:
+                Passcheck = input("Please enter the administrative password: ")
+                if Passcheck == Password:
+                    print("Okay, confirmed.\nWelcome Admin.")
+                    Admin = True
                     break
                 else:
-                    print("Invalid Input.")
-                    continue
+                    check = input("Are you sure you're an administrator? (Y/N)")
+                    if check.lower() == 'y' or check.lower() == 'yes':
+                        print("Okay, reloading.")
+                        continue
+                    elif check.lower() == 'n' or check.lower() == 'no':
+                        print("Okay, no problem.")
+                        Admin = False
+                        break
+                    else:
+                        print("Invalid Input.")
+                        continue
+    except:
+        print("\nplease enter a valid input")
+        continue
