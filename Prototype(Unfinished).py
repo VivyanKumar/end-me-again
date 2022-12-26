@@ -180,14 +180,13 @@ def classCard():
     with open('Class Card.txt', 'r') as card:
         print(card.read())
         card.close()
+def changePass():
+    changedPass = input("Enter the new password: ")
+    with open('Password.txt', 'w') as f:
+        f.write(changedPass)
 
-def passChanger():
-    newPass = input("please enter the new password and it'll be used next time you run the program: ")
-    with open("Password.txt", "w") as f:
-        f.write(newPass)
-        print("password successfully updated")
 
-functionsList = [cardWriter, cardEditor, cardReader, classCard, passChanger]
+functionsList = [cardWriter, cardEditor, changePass, cardReader, classCard]
 
 while True:
     n = str(names).replace('[', '').replace(']', '').replace("'", '')
@@ -195,9 +194,9 @@ while True:
         print("---------------------------------------------------------------------\n"
         "press 1 if you want to write to a new file\n"
         "press 2 if you want to append the marks of an existing file\n"
-        "press 3 if you want to read the report card of a specific student\n"
-        "press 4 if you want the class report\n"
-        "press 5 if you want to change the administrator password\n"
+        "press 3 if you want to change the password\n"
+        "press 4 if you want to read the report card of a specific student\n"
+        "press 5 if you want the class report\n"
         "press 0 if you want to exit\n")
 
         choice = int(input("Please input your choice: "))
