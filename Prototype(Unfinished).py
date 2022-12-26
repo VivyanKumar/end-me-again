@@ -183,8 +183,7 @@ def classCard():
 
 def passChanger():
     newPass = input("please enter the new password and it'll be used next time you run the program: ")
-    with open("Password.txt", "r+") as f:
-        f.truncate(0)
+    with open("Password.txt", "w") as f:
         f.write(newPass)
         print("password successfully updated")
 
