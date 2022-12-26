@@ -150,6 +150,7 @@ def cardEditor():
                         temp[i+7] = '---------------------\n'
                         a = open('Class Card.txt', 'w')
                         a.writelines(temp)
+                        a.close()
             
 
         while True:
