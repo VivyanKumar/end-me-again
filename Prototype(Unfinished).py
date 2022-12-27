@@ -183,10 +183,11 @@ def classCard():
         print(card.read())
         card.close()
 def changePass():
-    newPass = input("Enter the new password: ")
+    changedPass = input("Enter the new password: ")
     with open('Password.txt', 'w') as f:
-        f.write(newPass)
-        print("password updated succesfully")
+        f.write(changedPass)
+        print(f"Successfully changed password. The new password is {changedPass}")
+
 
 functionsList = [cardWriter, cardEditor, changePass, cardReader, classCard]
 
