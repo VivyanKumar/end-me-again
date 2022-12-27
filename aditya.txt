@@ -1,0 +1,9 @@
+---------------------
+aditya's report card:
+maths marks: 67.0
+computer marks: 67.0
+english marks: 82.0
+Total marks: 216.0
+Average: 72.0
+Grade: C
+---------------------

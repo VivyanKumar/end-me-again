@@ -1,0 +1,45 @@
+---------------------
+aditya's report card:
+maths marks: 67.0
+computer marks: 67.0
+english marks: 82.0
+Total marks: 216.0
+Average: 72.0
+Grade: C
+---------------------
+---------------------
+wkldjliwjdliwjd's report card:
+maths marks: 90.0
+computer marks: 90.0
+english marks: 90.0
+Total marks: 270.0
+Average marks: 90.00
+Grade: A
+---------------------
+---------------------
+vivyan's report card:
+maths marks: 87.0
+computer marks: 65.0
+english marks: 77.0
+Total marks: 229.0
+Average: 76.33
+Grade: C
+---------------------
+---------------------
+rathiin's report card:
+maths marks: 82.0
+computer marks: 92.0
+english marks: 67.0
+Total marks: 241.0
+Average: 80.33
+Grade: B
+---------------------
+---------------------
+iqdhihqidq's report card:
+maths marks: 98.0
+computer marks: 67.0
+english marks: 56.0
+Total marks: 221.0
+Average marks: 73.67
+Grade: C
+---------------------
