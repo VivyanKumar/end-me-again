@@ -119,81 +119,102 @@ def cardWriter(): # used to write the report card
     l = open('List of names.txt', 'w') # opens the list of names file in write mode
     l.write(n) # writes the name.
 def cardEditor(): # used to edit the cards and class card accordingly.
-    cont = True # continue variable.
-    print(f"Students who have a card are {n}") # prints all the students that have a card.
-    name = nameCheck(input("please enter the student's name who's card you wish to edit: "),'The name cannot contain any numbers or special characters.') # asks for the input for the student whose card you want to change.
-    while True: # while loop to make sure it keeps running
+    n = str(names).replace('[', '').replace(']', '').replace("'", '')
+    error = 0
+    while error <= 3: # while loop to make sure it keeps running
+        cont = True # continue variable.
+        print(f"Students who have a card are {n}") # prints all the students that have a card.
+        name = nameCheck(input("please enter the student's name who's card you wish to edit: "),'The name cannot contain any numbers or special characters.') # asks for the input for the student whose card you want to change.
         try: # tries to open the name file
             with open(f"{name}.txt", "r") as f: # using *with* eliminates the need to close the file as it does it automatically.
                 lines = f.readlines() # lines stores all the lines of the name file as as list.
-                break # breaks the while True: loop
         except FileNotFoundError: # if it doesn't work, prints invalid input.
-            print("invalid input")
-            continue # restarts the whie True loop
-    while cont: # same as while True
-        subject = input("please enter which subject's marks you wish to change (maths for maths, computer for computer science and english for english.): ") # this will be changed later to include more inputs (maths, mathematics, so on)
-        while True:
-            num = ValueErrorCheck(input('Please enter the marks you want to change it to: '), 'The marks must be among 0 and 100', 'The marks must be a number.') # asks the user to enter the marks that they want to change it to.
-            if num == None:
-                continue
-            else:
-                break
-        if subject.lower() == "maths" or subject.lower() == 'mathematics' or subject.lower() == 'math' or subject.lower() == 'm': # checks if the input is maths, not being case sensitive.
-            lines[2] = f'maths marks: {num}\n' # sets the list variable to the new marks
-        elif subject.lower() == "computer" or subject.lower() == 'computers' or subject.lower() == 'cs' or subject.lower() == 'computer science' or subject.lower() == 'c': # checks if the input is computer
-            lines[3] = f'computer marks: {num}\n' # sets the list variable to the new marks.
-        elif subject.lower() == "english" or subject.lower() == 'eng' or subject.lower() == 'e' or subject.lower() == 'en': # checks if the input is english.
-            lines[4] = f'english marks: {num}\n' # sets the list variable to the new marks.
-        else: # if the input is none of these, it prints invalid input.
-            print("Invalid input.\n"
-                "The subjects can only be either maths, computer science or english.\n")
+            print("The student does not exist\n"
+                f"You have {3-error} tries left.\n")
+            error += 1
             continue
-
-        with open(f"{name}.txt", "w") as f: # opens the name text file in write mode and writes the new lines.
-            f.writelines(lines)
-        with open(f'{name}.txt', 'r') as f: # opens the name text file in read mode.
-            l = f.readlines() # stores all the lines in a list
-            math = float(l[2].replace("maths marks: ", '').replace('\n', '')) # gets the maths marks, .replace() is used to get only the marks.
-            cs = float(l[3].replace("computer marks: ", '').replace('\n','')) # gets the computer marks
-            eng = float(l[4].replace("english marks: ", '').replace('\n', '')) # gets the english marks.
-            b = open(f'{name}.txt', 'w') # opens the file in write mode.
-            total = math + cs + eng # remakes the total
-            avg = round((total / 3), 2) # remakes the average
-            grade = grades(avg) # remakes the grade
-            card = f"---------------------\n{name}'s report card:\nmaths marks: {math}\ncomputer marks: {cs}\nenglish marks: {eng}\nTotal marks: {total}\nAverage: {avg}\nGrade: {grade}\n---------------------\n" # remakes the card.
-            b.write(card) # rewrites the card.
-            b.close() # closes the file.
-            with open('Class Card.txt', 'r') as fi: # opens the Class card text file as a read file.
-                temp = fi.readlines() # temp variable is used to store all the lines of the Class Card file into a list.
-                for i in range(len(temp)): # used a for loop to loop through each of the lines.
-                    if temp[i] == f"{name}'s report card:\n": # checks if line[i] has the name of the student that is being changed.
-                        temp[i] = f"{name}'s report card:\n"
-                        temp[i+1] = f"maths marks: {math}\n"
-                        temp[i+2] = f"computer marks: {cs}\n"
-                        temp[i+3] = f"english marks: {eng}\n"
-                        temp[i+4] = f"Total marks: {total}\n"
-                        temp[i+5] = f"Average: {avg}\n"
-                        temp[i+6] = f"Grade: {grade}\n"
-                        temp[i+7] = '---------------------\n' # sets all the lines to the updated lines with the new values.
-                        a = open('Class Card.txt', 'w') # opens the class card text file in write mode.
-                        a.writelines(temp) # writes the lines stored in temp
-                        a.close() # closes the file.
-            
-
-        while True: # while true is used to keep the code running even if the value is invalid.
-            choice = input("would you like to change another grade? (Y/N): ") # yes or no choice for changing another grade.
-            if choice.lower() == 'y': # if the choice is yes
-                cont = True # cont is set to true, effectively re-running the code.
-                break # breaks this while loop
-            elif choice.lower() == 'n':
-                cont = False # cont is set to false, effectively terminating the code.
-                break # breaks the while loop
-            else: # otherwise
-                print("The input is invalid") # prints the input is invalid.
+        while cont: # same as while True
+            subject = input("please enter which subject's marks you wish to change (maths for maths, computer for computer science and english for english.): ") # this will be changed later to include more inputs (maths, mathematics, so on)
+            if subject.lower() == "maths" or subject.lower() == 'mathematics' or subject.lower() == 'math' or subject.lower() == 'm': # checks if the input is maths, not being case sensitive.
+                while True:
+                    num = ValueErrorCheck(input('Please enter the marks you want to change it to: '), 'The marks must be among 0 and 100', 'The marks must be a number.') # asks the user to enter the marks that they want to change it to.
+                    if num == None:
+                        continue
+                    else:
+                        break
+                lines[2] = f'maths marks: {num}\n' # sets the list variable to the new marks
+            elif subject.lower() == "computer" or subject.lower() == 'computers' or subject.lower() == 'cs' or subject.lower() == 'computer science' or subject.lower() == 'c': # checks if the input is computer
+                while True:
+                    num = ValueErrorCheck(input('Please enter the marks you want to change it to: '), 'The marks must be among 0 and 100', 'The marks must be a number.') # asks the user to enter the marks that they want to change it to.
+                    if num == None:
+                        continue
+                    else:
+                        break
+                lines[3] = f'computer marks: {num}\n' # sets the list variable to the new marks.
+            elif subject.lower() == "english" or subject.lower() == 'eng' or subject.lower() == 'e' or subject.lower() == 'en': # checks if the input is english.
+                while True:
+                    num = ValueErrorCheck(input('Please enter the marks you want to change it to: '), 'The marks must be among 0 and 100', 'The marks must be a number.') # asks the user to enter the marks that they want to change it to.
+                    if num == None:
+                        continue
+                    else:
+                        break
+                lines[4] = f'english marks: {num}\n' # sets the list variable to the new marks.
+            else: # if the input is none of these, it prints invalid input.
+                print("Invalid input.\n"
+                    "The subjects can only be either maths, computer science or english.\n")
                 continue
+            with open(f"{name}.txt", "w") as f: # opens the name text file in write mode and writes the new lines.
+                f.writelines(lines)
+            with open(f'{name}.txt', 'r') as f: # opens the name text file in read mode.
+                l = f.readlines() # stores all the lines in a list
+                math = float(l[2].replace("maths marks: ", '').replace('\n', '')) # gets the maths marks, .replace() is used to get only the marks.
+                cs = float(l[3].replace("computer marks: ", '').replace('\n','')) # gets the computer marks
+                eng = float(l[4].replace("english marks: ", '').replace('\n', '')) # gets the english marks.
+                b = open(f'{name}.txt', 'w') # opens the file in write mode.
+                total = math + cs + eng # remakes the total
+                avg = round((total / 3), 2) # remakes the average
+                grade = grades(avg) # remakes the grade
+                card = f"---------------------\n{name}'s report card:\nmaths marks: {math}\ncomputer marks: {cs}\nenglish marks: {eng}\nTotal marks: {total}\nAverage: {avg}\nGrade: {grade}\n---------------------\n" # remakes the card.
+                b.write(card) # rewrites the card.
+                b.close() # closes the file.
+                with open('Class Card.txt', 'r') as fi: # opens the Class card text file as a read file.
+                    temp = fi.readlines() # temp variable is used to store all the lines of the Class Card file into a list.
+                    for i in range(len(temp)): # used a for loop to loop through each of the lines.
+                        if temp[i] == f"{name}'s report card:\n": # checks if line[i] has the name of the student that is being changed.
+                            temp[i] = f"{name}'s report card:\n"
+                            temp[i+1] = f"maths marks: {math}\n"
+                            temp[i+2] = f"computer marks: {cs}\n"
+                            temp[i+3] = f"english marks: {eng}\n"
+                            temp[i+4] = f"Total marks: {total}\n"
+                            temp[i+5] = f"Average: {avg}\n"
+                            temp[i+6] = f"Grade: {grade}\n"
+                            temp[i+7] = '---------------------\n' # sets all the lines to the updated lines with the new values.
+                            a = open('Class Card.txt', 'w') # opens the class card text file in write mode.
+                            a.writelines(temp) # writes the lines stored in temp
+                            a.close() # closes the file.
+                
+
+            while True: # while true is used to keep the code running even if the value is invalid.
+                choice = input("would you like to change another grade? (Y/N): ") # yes or no choice for changing another grade.
+                if choice.lower() == 'y': # if the choice is yes
+                    cont = True # cont is set to true, effectively re-running the code
+                    break # breaks this while loop
+                elif choice.lower() == 'n':
+                    cont = False # cont is set to false, effectively terminating the code.
+                    error = 4
+                    break # breaks the while loop
+                else: # otherwise
+                    print("The input is invalid") # prints the input is invalid.
+                    continue
 def cardReader(): # used to read the cards and print them into the console.
+    n = str(names).replace('[', '').replace(']', '').replace("'", '')
     print(f"The students are: {n}") # prints the list of students again.
-    student_name = nameCheck(input("Enter the student's name of whose report card you want: "),'The name cannot contain numbers or special characters') # asks for the student name.  # capitalize the name
+    while True:
+        student_name = nameCheck(input("Enter the student's name of whose report card you want: "),'The name cannot contain numbers or special characters') # asks for the student name.  # capitalize the name
+        if student_name == None:
+            continue
+        else:
+            break
     file_name = f"{student_name}.txt"  # the file name
     try: # try statement used to prevent the code from terminating.
         with open(file_name, "r") as f:  # making it easier to work with.
@@ -254,13 +275,13 @@ while True: # used to cause the program to not completely terminate.
             "press 0 if you want to exit\n")
         
         try:
-            choice = int(input("Please enter your choice.")) # asks for the choice.
+            choice = int(input("Please enter your choice:")) # asks for the choice.
         except ValueError:
             print("Your choice must be a number.")
             continue
         if choice in range(1,3): # if the choice is 1 or 2
             print("-----------------------------------------------------------------")
-            functionsList[choice+1]() # choice + 1 is used to make sure that the user doesn't accidentally open a different function.
+            functionsList[choice+2]() # choice + 1 is used to make sure that the user doesn't accidentally open a different function.
         elif choice == 0: # if the choice is 0
             print("Exiting")
             print("-----------------------------------------------------------------")
@@ -277,8 +298,9 @@ while True: # used to cause the program to not completely terminate.
                 break # breaks the code
             else: # if they get the password wrong.
                 error_check += 1
-                check = input("Are you sure you're an administrator? (Y/N)") # used to make sure that the user didn't input the incorrect password on accident.
+                print(f"You have {4-error_check} attempt(s) remaining.")
                 if error_check <= 3:
+                    check = input("Are you sure you're an administrator? (Y/N)") # used to make sure that the user didn't input the incorrect password on accident.
                     if check.lower() == 'y' or check.lower() == 'yes': # if it is yes
                         print("Okay, reloading.")
                         continue # reloads the password entering screen.
