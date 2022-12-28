@@ -54,7 +54,9 @@ Key:
     2️⃣***Create a prototype for the code with no error handling, assuming the best case scenario***  
       
     **To be finished by *28/12/22* by the *latest***  
+    
+    
   
+***25/12/2022*** 2️⃣***~~Create a prototype for the code with no error handling, assuming the best case scenario~~*** Completed  
   
-  
-***25/12/2022*** 2️⃣***~~Create a prototype for the code with no error handling, assuming the best case scenario~~*** Completed
+***28/12/2022*** ➡️**~~Show ma'am the prototype with the best case scenario~~**
