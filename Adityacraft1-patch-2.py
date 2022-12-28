@@ -8,12 +8,10 @@ try:
         print("There is no password entered. So, just press enter. Please set a password after this program.")
     fil.close()
 except FileNotFoundError:
-    fil = open('Password.txt', 'x')
     Password = 'DPSI TEACHER PASS'
-    fil.close()
-    fil = open('Password.txt', 'w')
-    fil.write(f'{Password}')
-    fil.close()
+    with open('Password.txt', 'w', encoding="UTF-8") as f:
+        f.write(Password)
+        f.close()
 
 names = []
 try:
@@ -21,7 +19,7 @@ try:
     names.append(fi.read().split(', '))
     fi.close()
 except FileNotFoundError:
-    fi = open('List of names.txt', 'x')
+    fi = open('List of names.txt', 'x', encoding="UTF-8")
     fi.close()
 n = str(names).replace('[', '').replace(']', '').replace("'", '')
 Admin = None
@@ -61,18 +59,14 @@ def nameCheck(val: str):
     strings = val.split()
     checkList = [i.isalpha() for i in strings]
     count = len([val for val in checkList if val == False])
-    if count == 0:
-        return True
-    else:
-        return False
+    if count == 0: return True
+    else: return False
 
 def cardWriter():
     while True:
         name = input("Enter the student's name: ")
-        if nameCheck(name) == True:
-            break
-        else:
-            continue
+        if nameCheck(name) == True: break
+        else: continue
     names.append(name)
     n = str(names).replace('[', '').replace(']', '').replace("'", '')
 
@@ -92,7 +86,7 @@ def cardWriter():
                   f"Total marks: {total_marks}\n" \
                   f"Average marks: {average_marks:.2f}\n" \
                   f"Grade: {grade}\n---------------------\n"
-    card = open(f"{name}.txt", "w")
+    card = open(f"{name}.txt", "w", encoding="UTF-8")
     card.write(report_card)
     classcard = open('Class Card.txt', 'a')
     classcard.write(report_card)
@@ -234,7 +228,7 @@ while True:
             "press 1 if you want to read the report card of a student.\n"
             "press 2 if you want to read the class report card\n"
             "press 0 if you want to exit\n")
-        choice = valueCheckedInput(int, "please enter your choice: ", 0, 5)
+        choice = valueCheckedInput(int, "please enter your choice: ", 0, 2)
         if choice in range(1,3):
             print("-----------------------------------------------------------------")
             functionsList[choice+2]()
