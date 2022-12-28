@@ -1,9 +1,0 @@
----------------------
-wkldjliwjdliwjd's report card:
-maths marks: 90.0
-computer marks: 90.0
-english marks: 90.0
-Total marks: 270.0
-Average marks: 90.00
-Grade: A
----------------------
