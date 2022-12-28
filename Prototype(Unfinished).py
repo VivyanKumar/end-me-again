@@ -102,7 +102,7 @@ def cardWriter(): # used to write the report card
     l.write(n) # writes the name.
 def cardEditor(): # used to edit the cards and class card accordingly.
     cont = True # continue variable.
-    n = str(names).replace('[', '').replace(']', '').replace("''", "")
+    n = str(names).replace('[', '').replace(']', '').replace("'", "")
     print(f"Students who have a card are {n}") # prints all the students that have a card.
     name = input("please enter the student's name who's card you wish to edit: ") # asks for the input for the student whose card you want to change.
     while True: # while loop to make sure it keeps running
@@ -169,7 +169,7 @@ def cardEditor(): # used to edit the cards and class card accordingly.
                 print("The input is invalid") # prints the input is invalid.
                 continue
 def cardReader(): # used to read the cards and print them into the console.
-    n = str(names).replace('[', '').replace(']', '').replace("''", "")
+    n = str(names).replace('[', '').replace(']', '').replace("'", "")
     print(f"The students are: {n}") # prints the list of students again.
     student_name = input("Enter the student's name of whose report card you want: ") # asks for the student name.
     file_name = f"{student_name}.txt"  # the file name
