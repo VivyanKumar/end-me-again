@@ -120,15 +120,15 @@ def cardEditor():
             while True:
                 subject = input("please enter which subject's marks you wish to change (maths for maths, computer for computer science and english for english.): ")
                 if subject.lower() == "maths":
-                    num = valueCheckedInput(int, 'Please enter the marks you want to change it to: ', 0, 100)
+                    num = valueCheckedInput(float, 'Please enter the marks you want to change it to: ', 0, 100)
                     lines[2] = f'maths marks: {num}\n'
                     break
                 elif subject.lower() == "computer":
-                    num = valueCheckedInput(int, 'Please enter the marks you want to change it to: ', 0, 100)
+                    num = valueCheckedInput(float, 'Please enter the marks you want to change it to: ', 0, 100)
                     lines[3] = f'computer marks: {num}\n'
                     break
                 elif subject.lower() == "english":
-                    num = valueCheckedInput(int, 'Please enter the marks you want to change it to: ', 0, 100)
+                    num = valueCheckedInput(float, 'Please enter the marks you want to change it to: ', 0, 100)
                     lines[4] = f'english marks: {num}\n'
                     break
                 else:
