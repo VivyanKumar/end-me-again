@@ -102,6 +102,7 @@ def cardWriter(): # used to write the report card
     l.write(n) # writes the name.
 def cardEditor(): # used to edit the cards and class card accordingly.
     cont = True # continue variable.
+    n = str(names).replace('[', '').replace(']', '').replace("''", "")
     print(f"Students who have a card are {n}") # prints all the students that have a card.
     name = input("please enter the student's name who's card you wish to edit: ") # asks for the input for the student whose card you want to change.
     while True: # while loop to make sure it keeps running
@@ -168,9 +169,9 @@ def cardEditor(): # used to edit the cards and class card accordingly.
                 print("The input is invalid") # prints the input is invalid.
                 continue
 def cardReader(): # used to read the cards and print them into the console.
+    n = str(names).replace('[', '').replace(']', '').replace("''", "")
     print(f"The students are: {n}") # prints the list of students again.
     student_name = input("Enter the student's name of whose report card you want: ") # asks for the student name.
-    student_name = student_name.capitalize()  # capitalize the name
     file_name = f"{student_name}.txt"  # the file name
     try: # try statement used to prevent the code from terminating.
         with open(file_name, "r") as f:  # making it easier to work with.
@@ -222,7 +223,7 @@ while True: # used to cause the program to not completely terminate.
         choice = int(input("Please enter your choice.")) # asks for the choice.
         if choice in range(1,3): # if the choice is 1 or 2
             print("-----------------------------------------------------------------")
-            functionsList[choice+1]() # choice + 1 is used to make sure that the user doesn't accidentally open a different function.
+            functionsList[choice+2]() # choice + 1 is used to make sure that the user doesn't accidentally open a different function.
         elif choice == 0: # if the choice is 0
             print("Exiting")
             print("-----------------------------------------------------------------")
