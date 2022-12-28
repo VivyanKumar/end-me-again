@@ -237,7 +237,7 @@ while True:
         choice = valueCheckedInput(int, "please enter your choice: ", 0, 5)
         if choice in range(1,3):
             print("-----------------------------------------------------------------")
-            functionsList[choice - 1]()
+            functionsList[choice+2]()
         else:
             print("Exiting")
             print("-----------------------------------------------------------------")
