@@ -38,43 +38,61 @@ def grades(input): # used to check grades
         if round(input) in key: # checks if the input provided is in the threshold.
             return grade # returns the grade.
             break # breaks the loop
+def nameCheck(input,error):
+    if input.count(' ') > 0:
+        inp = input.replace(' ', '')
+        if inp.isalpha() == True:
+            return input
+        else:
+            print(error)
+            return None
+    else:
+        if input.isalpha() == True:
+            return input
+        else:
+            print(error)
+            return None
+def ValueErrorCheck(input, error1, error2):
+    try:
+        input = float(input)
+        if round(input) in range(0, 101):
+            return input
+        else:
+            print(error1)
+    except ValueError:
+        print(error2)
 def cardWriter(): # used to write the report card
-    name = input("Enter the student's name: ") # name of the student
-    names.append(name) # adds the name entered to the list of names.
+    while True:
+        name = nameCheck(input("Enter the student's name: "), 'The name cannot have numbers or special characters') # name of the student
+        if name == None:
+            continue
+        else:
+            names.append(name)
+            break
     n = str(names).replace('[', '').replace(']', '').replace("'", '') # used to add the names into the list of names file
     # Ask for the student's grade for Mathematics
     while True:
-        try:
-            math_grade = float(input("Enter the grade for Mathematics: "))
-            if not (0 <= math_grade <= 100):  # check if the mark is between 0 and 100 (inclusive)
-                print("Invalid mark. Please enter a mark between 0 and 100 (inclusive).")
-                continue
+        math_grade = ValueErrorCheck(input(f"Please enter the maths marks of {name}: "), 'The marks must be among 0 and 100', 'The marks must be a number')
+        if math_grade == None:
+            continue
+        else:
             break
-        except ValueError:
-            print("Invalid input. Please enter a valid number.")
 
     # Ask for the student's grade for Computers
     while True:
-        try:
-            computer_grade = float(input("Enter the grade for Computers: "))
-            if not (0 <= computer_grade <= 100):  # check if the mark is between 0 and 100 (inclusive)
-                print("Invalid mark. Please enter a mark between 0 and 100 (inclusive).")
-                continue
+        computer_grade = ValueErrorCheck(input(f"Please enter the computer science marks of {name}: "), 'The number must be among 0 and 100', 'The input must be a number.')
+        if computer_grade == None:
+            continue
+        else:
             break
-        except ValueError:
-            print("Invalid input. Please enter a valid number.")
 
     # Ask for the student's grade for English
     while True:
-        try:
-            english_grade = float(input("Enter the grade for English: "))
-            if not (0 <= english_grade <= 100):  # check if the mark is between 0 and 100 (inclusive)
-                print("Invalid mark. Please enter a mark between 0 and 100 (inclusive).")
-                continue
+        english_grade = ValueErrorCheck(input(f'Please enter the english marks of {name}: '), 'The number must be among 0 and 100', 'The input must be a number')
+        if english_grade == None:
+            continue
+        else:
             break
-        except ValueError:
-            print("Invalid input. Please enter a valid number.")
-
     total_marks = math_grade + computer_grade + english_grade # calculates the total.
 
     # Calculate the average marks
@@ -103,26 +121,32 @@ def cardWriter(): # used to write the report card
 def cardEditor(): # used to edit the cards and class card accordingly.
     cont = True # continue variable.
     print(f"Students who have a card are {n}") # prints all the students that have a card.
-    name = input("please enter the student's name who's card you wish to edit: ") # asks for the input for the student whose card you want to change.
+    name = nameCheck(input("please enter the student's name who's card you wish to edit: "),'The name cannot contain any numbers or special characters.') # asks for the input for the student whose card you want to change.
     while True: # while loop to make sure it keeps running
         try: # tries to open the name file
             with open(f"{name}.txt", "r") as f: # using *with* eliminates the need to close the file as it does it automatically.
                 lines = f.readlines() # lines stores all the lines of the name file as as list.
                 break # breaks the while True: loop
-        except: # if it doesn't work, prints invalid input.
+        except FileNotFoundError: # if it doesn't work, prints invalid input.
             print("invalid input")
             continue # restarts the whie True loop
     while cont: # same as while True
         subject = input("please enter which subject's marks you wish to change (maths for maths, computer for computer science and english for english.): ") # this will be changed later to include more inputs (maths, mathematics, so on)
-        num = float(input('Please enter the marks you want to change it to: ')) # asks the user to enter the marks that they want to change it to.
-        if subject.lower() == "maths": # checks if the input is maths, not being case sensitive.
+        while True:
+            num = ValueErrorCheck(input('Please enter the marks you want to change it to: '), 'The marks must be among 0 and 100', 'The marks must be a number.') # asks the user to enter the marks that they want to change it to.
+            if num == None:
+                continue
+            else:
+                break
+        if subject.lower() == "maths" or subject.lower() == 'mathematics' or subject.lower() == 'math' or subject.lower() == 'm': # checks if the input is maths, not being case sensitive.
             lines[2] = f'maths marks: {num}\n' # sets the list variable to the new marks
-        elif subject.lower() == "computer" or subject.lower() == 'computers' or subject.lower() == 'cs': # checks if the input is computer
+        elif subject.lower() == "computer" or subject.lower() == 'computers' or subject.lower() == 'cs' or subject.lower() == 'computer science' or subject.lower() == 'c': # checks if the input is computer
             lines[3] = f'computer marks: {num}\n' # sets the list variable to the new marks.
-        elif subject.lower() == "english": # checks if the input is english.
+        elif subject.lower() == "english" or subject.lower() == 'eng' or subject.lower() == 'e' or subject.lower() == 'en': # checks if the input is english.
             lines[4] = f'english marks: {num}\n' # sets the list variable to the new marks.
         else: # if the input is none of these, it prints invalid input.
-            print("invalid value")
+            print("Invalid input.\n"
+                "The subjects can only be either maths, computer science or english.\n")
             continue
 
         with open(f"{name}.txt", "w") as f: # opens the name text file in write mode and writes the new lines.
@@ -169,8 +193,7 @@ def cardEditor(): # used to edit the cards and class card accordingly.
                 continue
 def cardReader(): # used to read the cards and print them into the console.
     print(f"The students are: {n}") # prints the list of students again.
-    student_name = input("Enter the student's name of whose report card you want: ") # asks for the student name.
-    student_name = student_name.capitalize()  # capitalize the name
+    student_name = nameCheck(input("Enter the student's name of whose report card you want: "),'The name cannot contain numbers or special characters') # asks for the student name.  # capitalize the name
     file_name = f"{student_name}.txt"  # the file name
     try: # try statement used to prevent the code from terminating.
         with open(file_name, "r") as f:  # making it easier to work with.
@@ -179,20 +202,26 @@ def cardReader(): # used to read the cards and print them into the console.
     except FileNotFoundError:  # If there is a FileNotFoundError
         print(f"Report card for {student_name} not found.")  # This is printed.
 def classCard(): # used to get and print the class card into console.. (the report cards of all the students in one file.)
-    with open('Class Card.txt', 'r') as card: # opening the Class Card text file as read mode.
-        print(card.read()) # reads the class card and prints it into the console.
+    try:
+        with open('Class Card.txt', 'r') as card: # opening the Class Card text file as read mode.
+            print(card.read()) # reads the class card and prints it into the console.
+    except FileNotFoundError:
+        print('The Class Card file could not be found. This error should not be called. Are you sure that you did not delete the Class Card file on accident?')
 def changePass(): # used to change the password without having the edit the file.
-    with open('Password.txt', 'r') as temp:
-        Pass = temp.read()
-    print(f"The current password is {Pass}")
-    changedPass = input("Enter the new password: ") # new password.
-    with open('Password.txt', 'w') as f: # opens the Password.txt file in write mode.
-        f.write(changedPass) # writes the changed password into the file
-        print(f"Successfully changed password. The new password is {changedPass}") # sends a success print statement.
-
+    try:
+        with open('Password.txt', 'r') as temp:
+            Pass = temp.read()
+        print(f"The current password is {Pass}")
+        changedPass = input("Enter the new password: ") # new password.
+        with open('Password.txt', 'w') as f: # opens the Password.txt file in write mode.
+            f.write(changedPass) # writes the changed password into the file
+            print(f"Successfully changed password. The new password is {changedPass}") # sends a success print statement.
+    except FileNotFoundError:
+        print("This error is only shown if the Password.txt file does not exist and this does not occur naturally. Are you sure you did not delete the Password.txt file?")
 
 functionsList = [cardWriter, cardEditor, changePass, cardReader, classCard] # list of functions.
 
+error_check = 0
 while True: # used to cause the program to not completely terminate.
     if Admin == True: # if the user is an admin.
         print("---------------------------------------------------------------------\n" # prints all the functions, including administrative ones.
@@ -203,7 +232,11 @@ while True: # used to cause the program to not completely terminate.
         "press 5 if you want the class report\n"
         "press 0 if you want to exit\n")
 
-        choice = int(input("Please input your choice: ")) # asks for the choice
+        try:
+            choice = int(input("Please input your choice: ")) # asks for the choice
+        except ValueError:
+            print("Your choice has to be a number.")
+            continue
         if choice in range(1, 6):
             print("-----------------------------------------------------------------")
             functionsList[choice-1]() # calls the function for the choice that is chosen.
@@ -212,14 +245,19 @@ while True: # used to cause the program to not completely terminate.
                 "-----------------------------------------------------------------")
             break
         else: # if the choice is neither of the above
-            print("please enter a valid input thats listed below") # this error message is printed.
+            print("Your choice must be between 0 and 5.") # this error message is printed.
             continue
     elif Admin == False: # if the password is incorrect.
         print("---------------------------------------------------------------------\n" # prints all the non-administrative functions
             "press 1 if you want to read the report card of a student.\n" # like reading the report card of other students
             "press 2 if you want to read the class report card\n" # and reading the class card.
             "press 0 if you want to exit\n")
-        choice = int(input("Please enter your choice.")) # asks for the choice.
+        
+        try:
+            choice = int(input("Please enter your choice.")) # asks for the choice.
+        except ValueError:
+            print("Your choice must be a number.")
+            continue
         if choice in range(1,3): # if the choice is 1 or 2
             print("-----------------------------------------------------------------")
             functionsList[choice+1]() # choice + 1 is used to make sure that the user doesn't accidentally open a different function.
@@ -228,7 +266,7 @@ while True: # used to cause the program to not completely terminate.
             print("-----------------------------------------------------------------")
             break # the code is terminated.
         else: # if neither
-            print("Enter a valid input") # prints this error message.
+            print("Your choice must be between 0 and 2") # prints this error message.
             continue
     else: # if the user is not an admin
         while True: # while true to keep it running.
@@ -238,15 +276,20 @@ while True: # used to cause the program to not completely terminate.
                 Admin = True # sets admin to true
                 break # breaks the code
             else: # if they get the password wrong.
-                # this system will be revamped later on to make sure that you only get 3 extra attempts to get the password correct, otherwise the code will terminate.
+                error_check += 1
                 check = input("Are you sure you're an administrator? (Y/N)") # used to make sure that the user didn't input the incorrect password on accident.
-                if check.lower() == 'y' or check.lower() == 'yes': # if it is yes
-                    print("Okay, reloading.")
-                    continue # reloads the password entering screen.
-                elif check.lower() == 'n' or check.lower() == 'no': # if it is no
-                    print("Okay, no problem.")
-                    Admin = False # sets admin to false
-                    break # and breaks the while loop to continue with non admin version of the code.
-                else: # if neither
-                    print("Invalid Input.") # error message
-                    continue # prompt is re-asked
+                if error_check <= 3:
+                    if check.lower() == 'y' or check.lower() == 'yes': # if it is yes
+                        print("Okay, reloading.")
+                        continue # reloads the password entering screen.
+                    elif check.lower() == 'n' or check.lower() == 'no': # if it is no
+                        print("Okay, no problem.")
+                        Admin = False # sets admin to false
+                        break # and breaks the while loop to continue with non admin version of the code.
+                    else: # if neither
+                        print("Invalid Input.") # error message
+                        continue # prompt is re-asked
+                elif error_check > 3:
+                    print("Sorry but the password is incorrect and you have ran out of attempts.\n""Opening in non-administrator mode.")
+                    Admin = False
+                    break
