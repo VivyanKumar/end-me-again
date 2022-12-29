@@ -101,7 +101,6 @@ def cardEditor():
     else:
         cont1 = True
         while cont1:
-            cont = True
             print(f"Students who have a card are {n}")
             name = input("please enter the student's name who's card you wish to edit: ")
             try:
@@ -163,11 +162,9 @@ def cardEditor():
                 choice = input("would you like to change another grade? (Y/N): ")
                 if choice.lower() == 'y':
                     cont1 = True
-                    cont = True
                     break
                 elif choice.lower() == 'n':
                     cont1 = False
-                    cont = False
                     break
                 else:
                     print("The input is invalid")
